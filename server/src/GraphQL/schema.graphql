@@ -13,4 +13,5 @@ type Mutation {
   createItem(name: String!): Item
   removeItem(id: ID!): String!
   removeAllItems: String!
+  buyItem(id: ID!): String!
 }

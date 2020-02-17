@@ -1,11 +1,14 @@
-export default {
+const Item = require("../database/schemas/Item");
+
+module.exports = {
   Query: {
-    items: () => ,
-    item: (_, { id }) => ,
+    items: () => Item.find(),
+    item: (_, { id }) => Item.findById(id)
   },
   Mutation: {
-    createItem: (_, {name}) => ,
-    removeItem: (_, {id}) => ,
-    removeAllItems: () =>
+    createItem: (_, { name }) => Item.create({ name, state: false }),
+    removeItem: (_, { id }) => Item.findByIdAndDelete(id),
+    buyItem: (_, { id }) => Item.findByIdAndUpdate(id, { state: true }),
+    removeAllItems: () => Item.deleteMany({})
   }
-}
+};
