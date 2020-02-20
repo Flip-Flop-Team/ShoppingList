@@ -3,6 +3,7 @@ const path = require("path");
 const resolvers = require("./GraphQL/resolvers");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const express = require("express");
 
 dotenv.config({ path: ".env" });
 
@@ -19,5 +20,7 @@ const server = new GraphQLServer({
   typeDefs: path.resolve(__dirname, "GraphQL", "schema.graphql"),
   resolvers
 });
+
+server.express.use(express.static(path.join(__dirname, "../../client/build")));
 
 server.start({ port: 3000 });
